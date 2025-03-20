@@ -1,0 +1,22 @@
+{
+  "name": "ts-backend-cli",
+  "version": "1.0.0",
+  "main": "package/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "ts-backend-cli": "./package/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "child_process": "^1.0.2",
+    "fs-extra": "^11.3.0",
+    "inquirer": "^12.5.0"
+  }
+}
