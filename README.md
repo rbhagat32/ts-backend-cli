@@ -11,7 +11,7 @@ You can install the CLI globally using **npm** or **npx**:
 npm install -g types-backend
 
 # OR run directly using npx
-npx types-backend myapp
+npx types-backend
 ```
 
 ## 📦 Features
