@@ -10,7 +10,7 @@ async function main() {
   console.log(chalk.blue("🚀 Welcome to TypeScript Backend CLI!"));
 
   // Get the project name from command-line argument
-  const projectArg = process.argv[2]; // e.g., ts-backend-cli myapp → "myapp"
+  const projectArg = process.argv[2]; // e.g., types-backend myapp → "myapp"
 
   // Check for -y flag (auto mode)
   const autoMode = process.argv.includes("-y");

@@ -1,18 +1,31 @@
 {
-  "name": "ts-backend-cli",
+  "name": "types-backend",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "bin": {
-    "ts-backend-cli": "./index.js"
+    "types-backend": "./index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "typescript",
+    "express",
+    "backend",
+    "cli",
+    "nodejs",
+    "api",
+    "mongoose",
+    "automation",
+    "server",
+    "scaffolding"
+  ],
+  "author": "Raghav Bhagat",
   "license": "ISC",
-  "description": "",
+  "description": "A CLI tool to quickly generate an Express.js backend with TypeScript, MongoDB, and essential configurations.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rbhagat32/types-backend.git"
+  },
+  "homepage": "https://github.com/rbhagat32/types-backend#readme",
   "dependencies": {
     "chalk": "^5.4.1",
     "child_process": "^1.0.2",
