@@ -1,13 +1,13 @@
 {
   "name": "ts-backend-cli",
   "version": "1.0.0",
-  "main": "package/index.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "ts-backend-cli": "./package/index.js"
+    "ts-backend-cli": "./index.js"
   },
   "keywords": [],
   "author": "",
