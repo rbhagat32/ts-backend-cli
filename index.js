@@ -82,7 +82,7 @@ async function main() {
   execSync(`npm i ${dependencies.join(" ")}`, { stdio: "inherit" });
 
   // Install dev dependencies
-  console.log(chalk.green("⚒️  Installing dev dependencies..."));
+  console.log(chalk.green("🛠️ Installing dev dependencies..."));
   let devDependencies = [
     "@types/node",
     "@types/express",
