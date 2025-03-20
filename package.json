@@ -1,6 +1,6 @@
 {
   "name": "types-backend",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -15,8 +15,7 @@
     "api",
     "mongoose",
     "automation",
-    "server",
-    "scaffolding"
+    "server"
   ],
   "author": "Raghav Bhagat",
   "license": "ISC",
