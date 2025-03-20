@@ -9,6 +9,9 @@ import chalk from "chalk";
 async function main() {
   console.log(chalk.blue("🚀 Welcome to TypeScript Backend CLI!"));
 
+  // Get the project name from command-line argument
+  const projectArg = process.argv[2]; // e.g., ts-backend-cli myapp → "myapp"
+
   // Check for -y flag (auto mode)
   const autoMode = process.argv.includes("-y");
 
@@ -19,18 +22,19 @@ async function main() {
       chalk.yellow("⚡ Running in auto mode with default settings...")
     );
     answers = {
-      projectName: "backend",
+      projectName: projectArg || "backend", // Use CLI argument or default to "backend"
       useCors: true,
       useDotenv: true,
       useAuth: true,
     };
   } else {
-    // Get user input
+    // Get user input if no project name is provided
     answers = await inquirer.prompt([
       {
         name: "projectName",
         message: "Enter project name:",
-        default: "backend",
+        default: projectArg || "backend", // Use CLI argument or prompt
+        when: !projectArg, // Ask only if no argument is given
       },
       {
         type: "confirm",
@@ -47,16 +51,21 @@ async function main() {
       {
         type: "confirm",
         name: "useAuth",
-        message: "Include authentication packages?",
+        message:
+          "Include authentication packages (cookie-parser, jsonwebtoken, bcrypt)?",
         default: true,
       },
     ]);
   }
 
+  const projectName = projectArg || answers.projectName;
+
   // Create project folder
-  const projectPath = path.join(process.cwd(), answers.projectName);
+  const projectPath = path.join(process.cwd(), projectName);
   fs.mkdirSync(projectPath, { recursive: true });
   process.chdir(projectPath);
+
+  console.log(chalk.green(`📂 Creating project: ${projectName}`));
 
   // Initialize package.json
   console.log(chalk.green("📦 Initializing package.json..."));
@@ -73,7 +82,7 @@ async function main() {
   execSync(`npm i ${dependencies.join(" ")}`, { stdio: "inherit" });
 
   // Install dev dependencies
-  console.log(chalk.green("🛠 Installing dev dependencies..."));
+  console.log(chalk.green("⚒️ Installing dev dependencies..."));
   let devDependencies = [
     "@types/node",
     "@types/express",
@@ -92,7 +101,7 @@ async function main() {
   execSync(`npm i -D ${devDependencies.join(" ")}`, { stdio: "inherit" });
 
   // Create folder structure
-  console.log(chalk.green("📂 Creating project structure..."));
+  console.log(chalk.green("📂 Creating folder structure..."));
   const folders = [
     "src/config",
     "src/constants",
@@ -116,8 +125,6 @@ async function main() {
 
     // MongoDB connection
     import { connectDB } from "./config/db.js";
-
-    // Routers
 
     const app = express();
 
@@ -180,27 +187,20 @@ async function main() {
   };
   fs.writeFileSync("tsconfig.json", JSON.stringify(tsConfig, null, 2));
 
-  // Read and update package.json
+  // Update package.json
   const packageJsonPath = "package.json";
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath));
+  packageJson.name = projectName;
 
-  // Create new object with correct order
   const updatedPackageJson = {
-    name: packageJson.name,
-    version: packageJson.version,
+    ...packageJson,
     main: "dist/app.js",
-    type: "module", // Now correctly placed after "main"
+    type: "module",
     scripts: {
       start: "node dist/app.js",
       build: "tsc",
       dev: 'concurrently "tsc -w" "npx nodemon dist/app.js"',
     },
-    keywords: [],
-    author: "",
-    license: "ISC",
-    description: "",
-    dependencies: packageJson.dependencies,
-    devDependencies: packageJson.devDependencies,
   };
 
   fs.writeFileSync(
@@ -232,7 +232,6 @@ async function main() {
         }
 
         const connection = await mongoose.connect(process.env.MONGODB_URI);
-
         console.log("Connected to MongoDB");
         return connection;
       } catch (error) {
@@ -245,45 +244,7 @@ async function main() {
     `
   );
 
-  // Create authentication files if auth is enabled
-  if (answers.useAuth) {
-    fs.writeFileSync(
-      "src/constants/cookieOptions.ts",
-      `export const cookieOptions = {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 15) // 15 days
-      };
-      `
-    );
-
-    fs.writeFileSync(
-      "src/utils/generateToken.ts",
-      `import { Response } from "express";
-      import jwt from "jsonwebtoken";
-      import { cookieOptions } from "../constants/cookieOptions.js";
-
-      interface User {
-        _id: string;
-      }
-
-      const generateToken = (res: Response, user: User) => {
-        const token = jwt.sign(
-          { userId: user._id },
-          process.env.JWT_SECRET_KEY as string,
-          { expiresIn: "15d" }
-        );
-
-        res.cookie("token", token, cookieOptions);
-      };
-
-      export { generateToken };
-      `
-    );
-  }
-
-  console.log(chalk.green("🎉 TypeScript Express backend setup complete! 🚀"));
+  console.log(chalk.green(`🎉 Project ${projectName} setup complete! 🚀`));
 }
 
 main().catch((error) => console.error(chalk.red("❌ Error:", error)));
