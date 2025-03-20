@@ -69,7 +69,7 @@ Just follow these 3 steps:
 myapp/
 │── src/
 │   ├── config/         # Configuration files (e.g., database)
-│	│	├──db.ts		# MongoDB connection setup
+       	├──db.ts		# MongoDB connection setup
 │   ├── constants/      # Constant values
 │   ├── controllers/    # Route handlers
 │   ├── helpers/        # Helper functions
