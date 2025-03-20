@@ -8,7 +8,7 @@ You can install the CLI globally using **npm** or **npx**:
 
 ```sh
 # Install globally (optional)
-npm install -g ttypes-backend
+npm install -g types-backend
 
 # OR run directly using npx
 npx types-backend myapp
