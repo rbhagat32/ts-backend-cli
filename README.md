@@ -2,6 +2,18 @@
 
 A CLI tool to quickly generate an **Express.js backend** with **TypeScript**, **MongoDB**, and essential configurations.
 
+## ⚡ Installation
+
+You can install the CLI globally using **npm** or **npx**:
+
+```sh
+# Install globally (optional)
+npm install -g ttypes-backend
+
+# OR run directly using npx
+npx types-backend myapp
+```
+
 ## 📦 Features
 
 ✅ **Generates a structured TypeScript backend**  
@@ -10,15 +22,3 @@ A CLI tool to quickly generate an **Express.js backend** with **TypeScript**, **
 ✅ **Optionally adds authentication, CORS, and dotenv support**  
 ✅ **Creates a ready-to-use folder structure**  
 ✅ **Supports automatic setup with `-y` flag**
-
-## ⚡ Installation
-
-You can install the CLI globally using **npm** or **npx**:
-
-```sh
-# Install globally (optional)
-npm install -g ts-backend-cli
-
-# OR run directly using npx
-npx ts-backend-cli myapp
-```
