@@ -69,7 +69,7 @@ async function main() {
 
   // Initialize package.json
   console.log(chalk.green("📦 Initializing package.json..."));
-  execSync("npm init -y", { stdio: "inherit" });
+  execSync("npm init -y");
 
   // Install dependencies
   console.log(chalk.green("📥 Installing dependencies..."));
@@ -79,10 +79,10 @@ async function main() {
   if (answers.useAuth)
     dependencies.push("jsonwebtoken", "cookie-parser", "bcrypt");
 
-  execSync(`npm i ${dependencies.join(" ")}`, { stdio: "inherit" });
+  execSync(`npm i ${dependencies.join(" ")}`);
 
   // Install dev dependencies
-  console.log(chalk.green("🛠️ Installing dev dependencies..."));
+  console.log(chalk.green("🛠️  Installing dev dependencies..."));
   let devDependencies = [
     "@types/node",
     "@types/express",
@@ -98,7 +98,7 @@ async function main() {
       "@types/bcrypt"
     );
 
-  execSync(`npm i -D ${devDependencies.join(" ")}`, { stdio: "inherit" });
+  execSync(`npm i -D ${devDependencies.join(" ")}`);
 
   // Create folder structure
   console.log(chalk.green("📂 Creating folder structure..."));
@@ -244,7 +244,7 @@ async function main() {
     `
   );
 
-  console.log(chalk.green(`🎉 Project ${projectName} setup complete! 🚀`));
+  console.log(chalk.green(`🎉 You are good to go ! 🚀`));
 }
 
 main().catch((error) => console.error(chalk.red("❌ Error:", error)));
