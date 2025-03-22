@@ -7,7 +7,7 @@ import inquirer from "inquirer";
 import chalk from "chalk";
 
 async function main() {
-  console.log(chalk.blue("🚀 Welcome to TypeScript Backend CLI by Raghav!"));
+  console.log(chalk.blue("🚀 Welcome to TypeScript Backend CLI !"));
 
   // Get the project name from command-line argument
   const projectArg = process.argv[2]; // e.g., types-backend myapp → "myapp"
