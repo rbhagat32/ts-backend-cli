@@ -79,7 +79,7 @@ async function main() {
   if (answers.useAuth)
     dependencies.push("jsonwebtoken", "cookie-parser", "bcrypt");
 
-  execSync(`npm i ${dependencies.join(" ")}`);
+  execSync(`npm i ${dependencies.join(" ")}`, { stdio: "ignore" });
 
   // Install dev dependencies
   console.log(chalk.green("🛠️  Installing dev dependencies..."));
@@ -193,7 +193,9 @@ async function main() {
   packageJson.name = projectName;
 
   const updatedPackageJson = {
-    ...packageJson,
+    name: packageJson.name,
+    version: packageJson.version,
+    description: packageJson.description,
     main: "dist/app.js",
     type: "module",
     scripts: {
@@ -201,6 +203,11 @@ async function main() {
       build: "tsc",
       dev: 'concurrently "tsc -w" "npx nodemon dist/app.js"',
     },
+    keywords: packageJson.keywords,
+    author: packageJson.author,
+    license: packageJson.license,
+    dependencies: packageJson.dependencies,
+    devDependencies: packageJson.devDependencies,
   };
 
   fs.writeFileSync(
