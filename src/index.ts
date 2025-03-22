@@ -271,6 +271,7 @@ async function main() {
   console.log(chalk.blue(`1️⃣  - cd ${projectName}`));
   console.log(chalk.blue(`2️⃣  - add your MongoDB URI in .env file`));
   console.log(chalk.blue(`3️⃣  - npm run dev`));
+  console.log(chalk.blue(``));
 }
 
 main().catch((error) => console.error(chalk.red("❌ Error:", error)));
