@@ -77,8 +77,33 @@ async function main() {
   console.log(chalk.green(`📂 Creating project: ${projectName}`));
 
   // Initialize package.json
-  console.log(chalk.green("📦 Initializing package.json..."));
+  console.log(chalk.green("📗 Initializing package.json..."));
   execSync("npm init -y");
+
+  // Create tsconfig.json
+  const tsConfig = {
+    compilerOptions: {
+      target: "ES2020",
+      module: "NodeNext",
+      rootDir: "src",
+      moduleResolution: "NodeNext",
+      outDir: "dist",
+      esModuleInterop: true,
+      forceConsistentCasingInFileNames: true,
+      strict: true,
+      skipLibCheck: true,
+      noUnusedLocals: true,
+      noUnusedParameters: true,
+    },
+  };
+  console.log(chalk.green("📘 Setting up tsconfig.json..."));
+  fs.writeFileSync("tsconfig.json", JSON.stringify(tsConfig, null, 2));
+
+  // Create .gitignore
+  const gitignoreContent = ["node_modules", "dist"];
+  if (answers.useDotenv) gitignoreContent.push(".env");
+  console.log(chalk.green("📙 Creating .gitignore..."));
+  fs.writeFileSync(".gitignore", gitignoreContent.join("\n"));
 
   // Install dependencies
   console.log(chalk.green("📥 Installing dependencies..."));
@@ -172,29 +197,6 @@ async function main() {
     });
     `
   );
-
-  // Create .gitignore
-  const gitignoreContent = ["node_modules", "dist"];
-  if (answers.useDotenv) gitignoreContent.push(".env");
-  fs.writeFileSync(".gitignore", gitignoreContent.join("\n"));
-
-  // Create tsconfig.json
-  const tsConfig = {
-    compilerOptions: {
-      target: "ES2020",
-      module: "NodeNext",
-      rootDir: "src",
-      moduleResolution: "NodeNext",
-      outDir: "dist",
-      esModuleInterop: true,
-      forceConsistentCasingInFileNames: true,
-      strict: true,
-      skipLibCheck: true,
-      noUnusedLocals: true,
-      noUnusedParameters: true,
-    },
-  };
-  fs.writeFileSync("tsconfig.json", JSON.stringify(tsConfig, null, 2));
 
   // Update package.json
   const packageJsonPath = "package.json";
