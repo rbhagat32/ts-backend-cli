@@ -14,7 +14,7 @@ interface Answers {
 }
 
 async function main() {
-  console.log(chalk.blue("🚀 Welcome to TypeScript Backend CLI asfda!"));
+  console.log(chalk.blue("🚀 Welcome to TypeScript Backend CLI !"));
 
   // Get the project name from command-line argument
   const projectArg = process.argv[2]; // e.g., types-backend myapp → "myapp"
@@ -73,6 +73,7 @@ async function main() {
   fs.mkdirSync(projectPath, { recursive: true });
   process.chdir(projectPath);
 
+  console.log(chalk.green(``));
   console.log(chalk.green(`📂 Creating project: ${projectName}`));
 
   // Initialize package.json
@@ -227,7 +228,7 @@ async function main() {
   if (answers.useDotenv) {
     fs.writeFileSync(
       ".env",
-      "PORT=3000\nMONGODB_URI=\nFRONTEND_URL_DEV=http://localhost:5173\nFRONTEND_URL_PROD=http://localhost:5174\n"
+      "PORT=3000\nMONGODB_URI=\nFRONTEND_URL_DEV=http://localhost:5173\nFRONTEND_URL_PROD=\n"
     );
     fs.writeFileSync(
       ".env.example",
@@ -260,6 +261,16 @@ async function main() {
   );
 
   console.log(chalk.green(`🎉 You are good to go ! 🚀`));
+  console.log(chalk.green(``));
+
+  console.log(
+    chalk.blue(`➡️  To start the development server, follow these steps:`)
+  );
+  console.log(chalk.blue(``));
+
+  console.log(chalk.blue(`1️⃣  - cd ${projectName}`));
+  console.log(chalk.blue(`2️⃣  - add your MongoDB URI in .env file`));
+  console.log(chalk.blue(`3️⃣  - npm run dev`));
 }
 
 main().catch((error) => console.error(chalk.red("❌ Error:", error)));
