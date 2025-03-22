@@ -6,8 +6,15 @@ import path from "path";
 import inquirer from "inquirer";
 import chalk from "chalk";
 
+interface Answers {
+  projectName: string;
+  useCors: boolean;
+  useDotenv: boolean;
+  useAuth: boolean;
+}
+
 async function main() {
-  console.log(chalk.blue("🚀 Welcome to TypeScript Backend CLI !"));
+  console.log(chalk.blue("🚀 Welcome to TypeScript Backend CLI asfda!"));
 
   // Get the project name from command-line argument
   const projectArg = process.argv[2]; // e.g., types-backend myapp → "myapp"
@@ -15,7 +22,7 @@ async function main() {
   // Check for -y flag (auto mode)
   const autoMode = process.argv.includes("-y");
 
-  let answers;
+  let answers: Answers;
 
   if (autoMode) {
     console.log(
@@ -29,12 +36,13 @@ async function main() {
     };
   } else {
     // Get user input if no project name is provided
-    answers = await inquirer.prompt([
+    answers = await inquirer.prompt<Answers>([
       {
         name: "projectName",
         message: "Enter project name:",
-        default: projectArg || "backend", // Use CLI argument or prompt
+        default: projectArg || "backend",
         when: !projectArg, // Ask only if no argument is given
+        type: "input", // Explicitly specify type
       },
       {
         type: "confirm",
@@ -189,7 +197,7 @@ async function main() {
 
   // Update package.json
   const packageJsonPath = "package.json";
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath));
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8"));
   packageJson.name = projectName;
 
   const updatedPackageJson = {

@@ -1,10 +1,17 @@
 {
   "name": "types-backend",
-  "version": "1.0.10",
-  "main": "index.js",
+  "version": "1.0.11",
+  "main": "dist/index.js",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "bin": {
-    "types-backend": "./index.js"
+    "types-backend": "./dist/index.js"
+  },
+  "scripts": {
+    "clean": "rimraf dist && rimraf node_modules && rimraf package-lock.json",
+    "build": "rimraf dist && tsc"
   },
   "keywords": [
     "typescript",
@@ -25,7 +32,8 @@
     "url": "https://github.com/rbhagat32/types-backend.git"
   },
   "homepage": "https://github.com/rbhagat32/types-backend#readme",
-  "dependencies": {
+  "devDependencies": {
+    "@types/node": "^22.13.11",
     "chalk": "^5.4.1",
     "child_process": "^1.0.2",
     "inquirer": "^12.5.0"
