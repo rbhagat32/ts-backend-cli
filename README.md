@@ -4,14 +4,14 @@ A CLI tool to quickly generate an **Express.js backend** with **TypeScript**, **
 
 ## ⚡ Installation
 
-You can install the CLI globally using **npm** or **npx**:
+You can directly run the CLI (using **npx**) or install globally (using **npm**) :
 
 ```sh
-# Install globally (optional)
-npm install -g types-backend
+# Run directly using npx
+npx types-backend@latest
 
-# OR run directly using npx
-npx types-backend
+# OR Install globally (optional)
+npm install -g types-backend
 ```
 
 ## 📦 Features
@@ -37,7 +37,7 @@ npx types-backend
 npx types-backend -y
 ```
 
-3️⃣ Give project name through CLI
+3️⃣ Enter project name through CLI
 
 ```sh
 npx types-backend myapp
@@ -58,8 +58,8 @@ You will be prompted for:
 
 ```sh
 Just follow these 3 steps:
--   Add your MONGODB_URI in .env file
--   Open terminal in newly created backend folder
+-   cd into the newly created backend directory
+-   add your MONGODB_URI in .env file
 -   npm run dev
 ```
 
